@@ -45,3 +45,36 @@ VALUES
 
 
 SELECT * FROM olympic_medals LIMIT 10;
+
+
+
+
+
+SELECT 
+    o.country,
+    o.region,
+    SUM(o.gold) * 100.0 / SUM(o.gold + o.silver + o.bronze) AS gold_percentage,
+    (SELECT AVG(SUM(o1.gold) * 100.0 / SUM(o1.gold + o1.silver + o1.bronze))
+     FROM olympic_medals o1
+     WHERE o1.region = o.region
+     GROUP BY o1.region) AS avg_gold_percentage
+FROM olympic_medals o
+GROUP BY o.country, o.region
+HAVING SUM(o.gold + o.silver + o.bronze) > 50
+ORDER BY gold_percentage DESC
+LIMIT 1;
+
+
+
+SELECT 
+    region, 
+    SUM(gold + silver + bronze) AS total_medals,
+    SUM(gold) * 100.0 / SUM(gold + silver + bronze) AS gold_percentage,
+    SUM(population) AS total_population
+FROM olympic_medals
+GROUP BY region
+HAVING SUM(gold + silver + bronze) > 100
+   AND SUM(gold) * 100.0 / SUM(gold + silver + bronze) > 30
+ORDER BY total_population DESC
+LIMIT 1;
+
