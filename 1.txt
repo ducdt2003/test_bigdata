@@ -1,0 +1,20 @@
+echo "country,country_code,region,gold,silver,bronze,total,gdp,gdp_year,population
+United States,USA,North America,40,44,42,126,81695.19,2023,334.9
+China,CHN,Asia,40,27,24,91,12614.06,2023,1410.7
+Japan,JPN,Asia,20,12,13,45,33834.39,2023,124.5
+Australia,AUS,Oceania,18,19,16,53,64711.77,2023,26.6
+France,FRA,Europe,16,26,22,64,44460.82,2023,68.2
+Netherlands,NLD,Europe,15,7,12,34,62536.73,2023,17.9
+Great Britain,GBR,Europe,14,22,29,65,48866.6,2023,68.3
+South Korea,KOR,Asia,13,9,10,32,33121.37,2023,51.7
+Italy,ITA,Europe,12,13,15,40,38373.17,2023,58.8
+Germany,DEU,Europe,12,13,8,33,52745.76,2023,84.5
+New Zealand,NZL,Oceania,10,7,3,20,48527.83,2023,5.2" > olympics_data.csv
+
+
+
+
+hdfs dfs -put olympics_data.csv /user/hadoop/olympics_data.csv
+
+
+hdfs dfs -ls /user/hadoop/
