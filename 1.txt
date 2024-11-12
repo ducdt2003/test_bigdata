@@ -78,3 +78,31 @@ HAVING SUM(gold + silver + bronze) > 100
 ORDER BY total_population DESC
 LIMIT 1;
 
+
+
+
+
+
+
+
+SELECT 
+    region,
+    AVG(gold * 100.0 / (gold + silver + bronze)) AS avg_gold_percentage,
+    AVG(silver * 100.0 / (gold + silver + bronze)) AS avg_silver_percentage,
+    AVG(bronze * 100.0 / (gold + silver + bronze)) AS avg_bronze_percentage
+FROM olympic_medals
+GROUP BY region
+ORDER BY avg_gold_percentage DESC;
+
+
+
+SELECT 
+    region,
+    SUM(gold + silver + bronze) AS total_medals,
+    SUM(population) AS total_population,
+    SUM(gold + silver + bronze) * 1.0 / SUM(population) AS medals_per_capita
+FROM olympic_medals
+GROUP BY region
+ORDER BY medals_per_capita DESC
+LIMIT 1;
+
